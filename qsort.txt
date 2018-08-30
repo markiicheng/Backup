@@ -1,0 +1,31 @@
+void qsort1(int* s, int l, int r)
+{
+    int tmp;
+    int head = l;
+    int end = r;
+    if(l < r)
+    {
+        while(l<r)
+        {
+            while((s[l] <= s[head]) && (l<r))
+                l++;
+            while((s[r] > s[head]) && (l<r))
+                r--;
+            tmp = s[l];
+            s[l] = s[r];
+            s[r] = tmp;
+            if(l < r)
+            {
+                l++;
+                r--;
+            }
+        }
+        tmp = s[head];
+        if((l == r) && (s[l] > tmp))
+            r--;
+        s[head] =s[r];
+        s[r] = tmp;
+        qsort1(s, head, r-1);
+        qsort1(s, r + 1, end);
+    }
+}
